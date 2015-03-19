@@ -1,7 +1,7 @@
 <?php
 $hash = @$_POST['hash'];
 $dsym = @$_FILES['dsym'];
-if (empty($hash) || empty($productName) || empty($dsym) || empty($dsym['size'])) {
+if (empty($hash) || empty($dsym) || empty($dsym['size'])) {
 	header("HTTP/1.0 400 Bad request");
 	exit;
 }
