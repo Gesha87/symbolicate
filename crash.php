@@ -9,6 +9,6 @@ if (empty($hash) ||  empty($architecture) || empty($loadAddress) || empty($addre
 	exit;
 }
 $fileName = '/var/dsyms/'.$hash.'/'.$productName;
-exec(escapeshellcmd("sudo /usr/bin/atosl -A $architecture -o $fileName -l $loadAddress $addresses"), $output);
+exec(escapeshellcmd("sudo /usr/local/bin/atosl -A $architecture -o $fileName -l $loadAddress $addresses"), $output);
 
 echo json_encode($output);
