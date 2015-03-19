@@ -5,7 +5,8 @@ $addresses = @$_POST['addresses'];
 $hash = @$_POST['hash'];
 $productName = @$_POST['product_name'];
 if (empty($hash) ||  empty($architecture) || empty($loadAddress) || empty($addresses) || empty($productName)) {
-	throw new HttpException();
+	header("HTTP/1.0 400 Bad request");
+	exit;
 }
 $fileName = '/var/dsyms/'.$hash.'/'.$productName;
 exec(escapeshellcmd("sudo /usr/bin/atosl -A $architecture -o $fileName -l $loadAddress $addresses"), $output);

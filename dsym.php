@@ -2,9 +2,13 @@
 $hash = @$_POST['hash'];
 $dsym = @$_FILES['dsym'];
 if (empty($hash) || empty($productName) || empty($dsym) || empty($dsym['size'])) {
-	throw new HttpException();
+	header("HTTP/1.0 400 Bad request");
+	exit;
 }
 $fileName = '/var/dsyms/'.$hash.'/'.$dsym['name'];
-move_uploaded_file($dsym['tmp_name'], $fileName);
+if (!move_uploaded_file($dsym['tmp_name'], $fileName)) {
+	header("HTTP/1.0 403 Access denied");
+	exit;
+}
 
-echo json_encode($output);
+echo 'Done!';
