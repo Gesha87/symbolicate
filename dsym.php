@@ -7,7 +7,13 @@ if (empty($hash) || empty($dsym) || empty($dsym['size'])) {
 }
 $dirName = '/var/dsyms/'.$hash;
 $fileName = $dirName.'/'.$dsym['name'];
-if (!mkdir($dirName) || !move_uploaded_file($dsym['tmp_name'], $fileName)) {
+if (!file_exists($dirName)) {
+	if (!mkdir($dirName)) {
+		header("HTTP/1.0 404 Access denied");
+		exit;
+	}
+}
+if (!move_uploaded_file($dsym['tmp_name'], $fileName)) {
 	header("HTTP/1.0 403 Access denied");
 	exit;
 }
