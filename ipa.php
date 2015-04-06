@@ -8,7 +8,7 @@ if (empty($hash) || empty($ipa) || empty($ipa['size'])) {
 $dirName = '/var/www/symbolicate/ipa/'.$hash;
 $fileName = $dirName.'/'.$ipa['name'];
 if (!file_exists($dirName)) {
-	if (!mkdir($dirName, true)) {
+	if (!mkdir($dirName, 0777, true)) {
 		header("HTTP/1.0 404 Access denied");
 		exit;
 	}
